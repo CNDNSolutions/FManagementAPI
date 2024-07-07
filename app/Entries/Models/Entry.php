@@ -9,7 +9,12 @@ class Entry extends Model
 {
     use HasFactory;
 
-    public function cost()
+    protected $hidden = [
+        'created_at',
+        'updated_at'
+    ];
+
+    public function costs()
     {
         return $this->hasMany(Cost::class, 'entryId', 'id');
     }

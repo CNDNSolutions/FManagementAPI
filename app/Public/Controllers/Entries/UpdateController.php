@@ -3,15 +3,16 @@
 namespace App\Public\Controllers\Entries;
 
 use App\Entries\Contracts\API\EntriesAPIContract;
-use App\Entries\RequestDTOFactory\StoreRequestDTOFactory;
+use App\Entries\Models\Entry;
+use App\Entries\RequestDTOFactory\UpdateRequestDTOFactory;
 use Illuminate\Http\Request;
 
-class StoreController
+class UpdateController
 {
-    public function store(Request $request, EntriesAPIContract $entriesAPI)
+    public function update(Request $request, EntriesAPIContract $entriesAPI)
     {
-
-        $entriesAPI->store(
+        $entriesAPI->update(
+            $request->route('id'),
             $request->json('date'),
             $request->json('profit'),
             $request->json('markup'),

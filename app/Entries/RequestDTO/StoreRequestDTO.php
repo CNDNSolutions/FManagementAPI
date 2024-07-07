@@ -2,8 +2,6 @@
 
 namespace App\Entries\RequestDTO;
 
-use App\Entries\Collections\CostsCollection;
-use Carbon\Carbon;
 use Illuminate\Support\Collection;
 
 class StoreRequestDTO

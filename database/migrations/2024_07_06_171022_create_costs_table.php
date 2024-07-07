@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('costs', function (Blueprint $table)
         {
             $table->id();
-            $table->foreignId('entryId');
+            $table->foreignId('entryId')->references('id')->on('entries')->onDelete('cascade');
             $table->integer('amount');
             $table->string('description');
             $table->timestamps();

@@ -2,18 +2,23 @@
 
 namespace App\Entries\RequestDTO;
 
+use Illuminate\Support\Collection;
+
 class UpdateRequestDTO
 {
-    public string $date;
+    public ?int $id;
 
-    public int $profit;
+    public ?string $date;
 
-    public int $markup;
+    public ?int $profit;
 
-    public array $costs;
+    public ?int $markup;
 
-    public function __construct(string $date, int $profit, int $markup, array $costs)
+    public ?Collection $costs;
+
+    public function __construct(int $id, string $date, int $profit, int $markup, Collection $costs)
     {
+        $this->id = $id;
         $this->date = $date;
         $this->profit = $profit;
         $this->markup = $markup;

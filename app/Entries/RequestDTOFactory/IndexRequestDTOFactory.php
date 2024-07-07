@@ -11,10 +11,12 @@ use Symfony\Component\HttpFoundation\Response;
 
 class IndexRequestDTOFactory
 {
-    public function getDTO(string $periodStart = null, string $periodEnd = null): IndexRequestDTO
+    private IndexRequestDTO $DTO;
+
+    public function __construct(?string $periodStart = null, ?string $periodEnd = null)
     {
-        $periodStart = $periodStart ?: Carbon::now()->startOfMonth()->toDateTimeString();
-        $periodEnd = $periodEnd ?: Carbon::now()->toDateTimeString();
+        $periodStart = $periodStart === null ? Carbon::now()->startOfMonth()->toDateTimeString() : $periodStart;
+        $periodEnd = $periodEnd === null ? Carbon::now()->toDateTimeString() : $periodEnd;
 
         $this->validate([
             'periodStart' => $periodStart,
@@ -24,7 +26,12 @@ class IndexRequestDTOFactory
         $periodStart = Carbon::parse($periodStart)->toDateTimeString();
         $periodEnd = Carbon::parse($periodEnd)->toDateTimeString();
 
-        return new IndexRequestDTO($periodStart, $periodEnd);
+        $this->DTO = new IndexRequestDTO($periodStart, $periodEnd);
+    }
+
+    public function get(): IndexRequestDTO
+    {
+        return $this->DTO;
     }
 
     private function validate(array $data)
@@ -36,7 +43,7 @@ class IndexRequestDTOFactory
 
         if ($validation->fails())
         {
-            throw new HttpResponseException(new JsonResponse($validation->messages(), 500));
+            throw new HttpResponseException(new JsonResponse($validation->messages(), 400));
         }
     }
 }

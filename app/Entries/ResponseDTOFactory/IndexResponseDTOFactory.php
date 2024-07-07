@@ -9,9 +9,16 @@ use Carbon\Carbon;
 
 class IndexResponseDTOFactory
 {
-    public function getDTO(EntriesCollection $entries = null): IndexResponseDTO
+    private IndexResponseDTO $DTO;
+
+    public function __construct(?EntriesCollection $entries = null)
     {
         $entries = $entries ?: new EntriesCollection();
-        return new IndexResponseDTO($entries);
+        $this->DTO = new IndexResponseDTO($entries);
+    }
+
+    public function get(): IndexResponseDTO
+    {
+        return $this->DTO;
     }
 }

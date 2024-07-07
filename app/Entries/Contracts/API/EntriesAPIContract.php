@@ -12,13 +12,13 @@ use App\Entries\ResponseDTO\ShowResponseDTO;
 
 interface EntriesAPIContract
 {
-    public function index(IndexRequestDTO $DTO): IndexResponseDTO;
+    public function index(mixed $periodStart = null, mixed $periodEnd = null): IndexResponseDTO;
 
-    public function show(ShowRequestDTO $DTO): ShowResponseDTO;
+    public function show(mixed $id = null): ShowResponseDTO;
 
-    public function store(StoreRequestDTO $DTO): void;
+    public function store(mixed $date = null, mixed $profit = null, mixed $markup = null, mixed $costs = null): void;
 
-    public function update(UpdateRequestDTO $DTO): void;
+    public function update(mixed $id = null, mixed $date = null, mixed $profit = null, mixed $markup = null, mixed $costs = null): void;
 
-    public function delete(DeleteRequestDTO $DTO): void;
+    public function delete(mixed $id = null): void;
 }

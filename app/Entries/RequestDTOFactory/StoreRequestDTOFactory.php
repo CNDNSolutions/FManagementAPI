@@ -10,12 +10,14 @@ use Illuminate\Support\Facades\Validator;
 
 class StoreRequestDTOFactory
 {
-    public function getDTO(string $date = null, int $profit = null, int $markup = null, string $costs = null): StoreRequestDTO
+    private StoreRequestDTO $DTO;
+
+    public function __construct(?string $date = null, ?int $profit = null, ?int $markup = null, ?array $costs = null)
     {
-        $date = $date ?: Carbon::now()->toDateTimeString();
-        $profit = $profit ?: 0;
-        $markup = $markup ?: 0;
-        $costs = $costs ? json_decode($costs, true) : [];
+        $date = $date === null ? Carbon::now()->toDateTimeString() : $date;
+        $profit = $profit === null ? 0 : $profit;
+        $markup = $markup === null ? 0 : $markup;
+        $costs = $costs === null ? [] : $costs;
 
         $this->validate([
             'date' => $date,
@@ -26,7 +28,12 @@ class StoreRequestDTOFactory
 
         $date = Carbon::parse($date)->toDateTimeString();
 
-        return new StoreRequestDTO($date, $profit, $markup, collect($costs));
+        $this->DTO = new StoreRequestDTO($date, $profit, $markup, collect($costs));
+    }
+
+    public function get(): StoreRequestDTO
+    {
+        return $this->DTO;
     }
 
     private function validate(array $data)

@@ -19,4 +19,9 @@ class CostsRepository implements CostsRepositoryContract
 
         return $Cost;
     }
+
+    public function deleteByEntryId(int $entryId): void
+    {
+        Cost::where('entryId', $entryId)->delete();
+    }
 }
