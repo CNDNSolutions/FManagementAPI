@@ -24,7 +24,7 @@ class EntriesRepository implements EntriesRepositoryContract
 
     public function getBetweenPeriod(string $periodStart, string $periodEnd): Collection
     {
-        return Entry::with('costs')->whereBetween('date', [$periodStart, $periodEnd])->get();
+        return Entry::with('costs')->whereBetween('date', [$periodStart, $periodEnd])->orderBy('date', 'ASC')->get();
     }
 
     public function getById(int $id): ?Entry
