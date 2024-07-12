@@ -37,12 +37,11 @@ class IndexRequestDTOFactory
     private function validate(array $data)
     {
         $validation = Validator::make($data, [
-            'periodStart' => 'required|date|before_or_equal:' . Carbon::now(),
-            'periodEnd' => 'required|date|before_or_equal:' . Carbon::now()
+            'periodStart' => 'required|date',
+            'periodEnd' => 'required|date'
         ]);
 
-        if ($validation->fails())
-        {
+        if ($validation->fails()) {
             throw new HttpResponseException(new JsonResponse($validation->messages(), 400));
         }
     }
