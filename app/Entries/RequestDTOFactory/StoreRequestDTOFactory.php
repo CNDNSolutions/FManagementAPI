@@ -45,10 +45,10 @@ class StoreRequestDTOFactory
             'costs' => 'array',
             'costs.*.amount' => 'required|integer|gte:0',
             'costs.*.description' => 'required|string',
+            'costs.*.type' => 'required|string',
         ]);
 
-        if ($validation->fails())
-        {
+        if ($validation->fails()) {
             throw new HttpResponseException(new JsonResponse($validation->messages(), 500));
         }
     }

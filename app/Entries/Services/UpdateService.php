@@ -12,8 +12,7 @@ class UpdateService implements UpdateServiceContract
     public function __construct(
         private EntriesRepositoryContract $entriesRepository,
         private CostsRepositoryContract $costsRepository
-    )
-    {
+    ) {
     }
 
     public function update(UpdateRequestDTO $DTO): void
@@ -22,9 +21,8 @@ class UpdateService implements UpdateServiceContract
 
         $this->costsRepository->deleteByEntryId($DTO->id);
 
-        $DTO->costs->each(function (array $cost) use ($DTO)
-        {
-            $this->costsRepository->save($DTO->id, $cost['amount'], $cost['description']);
+        $DTO->costs->each(function (array $cost) use ($DTO) {
+            $this->costsRepository->save($DTO->id, $cost['amount'], $cost['description'], $cost['type']);
         });
     }
 }

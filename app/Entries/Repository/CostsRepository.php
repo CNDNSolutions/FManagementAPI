@@ -7,13 +7,14 @@ use App\Entries\Models\Cost;
 
 class CostsRepository implements CostsRepositoryContract
 {
-    public function save(int $entryId, int $amount, string $description): Cost
+    public function save(int $entryId, int $amount, string $description, string $type): Cost
     {
         $Cost = new Cost();
 
         $Cost->entryId = $entryId;
         $Cost->amount = $amount;
         $Cost->description = $description;
+        $Cost->type = $type;
 
         $Cost->save();
 
