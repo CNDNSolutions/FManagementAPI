@@ -17,6 +17,7 @@ return new class extends Migration
             $table->integer('amount');
             $table->string('description');
             $table->string('type');
+            $table->boolean('isVariable');
             $table->timestamps();
         });
     }

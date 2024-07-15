@@ -46,6 +46,7 @@ class StoreRequestDTOFactory
             'costs.*.amount' => 'required|integer|gte:0',
             'costs.*.description' => 'required|string',
             'costs.*.type' => 'required|string',
+            'costs.*.isVariable' => 'required|boolean'
         ]);
 
         if ($validation->fails()) {

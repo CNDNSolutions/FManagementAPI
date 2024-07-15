@@ -22,7 +22,7 @@ class UpdateService implements UpdateServiceContract
         $this->costsRepository->deleteByEntryId($DTO->id);
 
         $DTO->costs->each(function (array $cost) use ($DTO) {
-            $this->costsRepository->save($DTO->id, $cost['amount'], $cost['description'], $cost['type']);
+            $this->costsRepository->save($DTO->id, $cost['amount'], $cost['description'], $cost['type'], $cost['isVariable']);
         });
     }
 }

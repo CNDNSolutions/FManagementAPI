@@ -20,7 +20,7 @@ class StoreService implements StoreServiceContract
         $Entry = $this->entriesRepository->save($DTO->date, $DTO->profit, $DTO->markup);
 
         $DTO->costs->each(function (array $cost) use ($Entry) {
-            $this->costsRepository->save($Entry->id, $cost['amount'], $cost['description'], $cost['type']);
+            $this->costsRepository->save($Entry->id, $cost['amount'], $cost['description'], $cost['type'], $cost['isVariable']);
         });
     }
 }
